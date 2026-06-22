@@ -1,36 +1,14 @@
-pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Install') {
-            steps {
-                bat 'npm install'
-            }
-        }
-        stage('Test') {
-            steps {
-                bat 'set CI=true && npm test'
-            }
-        }
-        stage('Start') {
-            when {
-                branch 'main'
-            }
-            steps {
-                bat 'npm start'
-            }
-        }
+node {
+    stage('Checkout') {
+        git url: 'https://github.com/dbwjd8653-a11y/jekins.git', branch: 'main', credentialsId: 'github-checkout-token'
     }
-    post {
-        success {
-            echo 'Pipeline 성공적으로 완료!'
-        }
-        failure {
-            echo 'Pipeline 실패!'
+
+    stage('Build') {
+        try {
+            bat 'npm install'
+            bat 'npm run build'
+        } catch (e) {
+            error "빌드 실패: ${e}"
         }
     }
 }
