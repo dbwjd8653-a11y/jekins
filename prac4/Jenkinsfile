@@ -1,4 +1,5 @@
-﻿node {
+﻿@'
+node {
     stage('Checkout') {
         git url: 'https://github.com/dbwjd8653-a11y/jekins.git', branch: 'main', credentialsId: 'github-checkout-token'
     }
@@ -27,3 +28,4 @@
         }
     }
 }
+'@ | Set-Content -Path "prac4\Jenkinsfile" -Encoding utf8 -NoNewline
