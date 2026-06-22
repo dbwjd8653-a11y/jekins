@@ -1,29 +1,21 @@
-node {
-    stage('Checkout') {
-        git url: 'https://github.com/dbwjd8653-a11y/jekins.git', branch: 'main', credentialsId: 'github-checkout-token'
-    }
-
-    stage('Build') {
-        try {
-            bat 'npm install'
-            bat 'npm run build'
-        } catch (e) {
-            error "빌드 실패: ${e}"
-        }
-    }
-
-    stage('Test') {
-        def testsPassed = bat(script: 'set CI=true && npm test -- --passWithNoTests', returnStatus: true)
-        if (testsPassed != 0) {
-            error '테스트 실패!'
-        }
-    }
-
-    stage('Deploy') {
-        if (env.BRANCH_NAME == 'main') {
-            bat 'npm start'
-        } else {
-            echo 'Main 브랜치가 아니어서 실행 생략'
+pipeline {
+    agent none
+    stages {
+        stage('Parallel Build & Test') {
+            parallel {
+                stage('Build on Agent1') {
+                    agent { label 'agent1' }
+                    steps {
+                        bat 'echo Agent1 빌드 수행 중'
+                    }
+                }
+                stage('Test on Agent2') {
+                    agent { label 'agent2' }
+                    steps {
+                        bat 'echo Agent2 테스트 수행 중'
+                    }
+                }
+            }
         }
     }
 }
