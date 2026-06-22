@@ -1,0 +1,8 @@
+{
+  "name": "jekins-test",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"테스트 통과\" && exit 0",
+    "start": "echo \"앱 시작!\""
+  }
+}
