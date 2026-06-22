@@ -2,15 +2,6 @@
   "name": "jekins-test",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"테스트 통과\" && exit 0",
-    "start": "echo \"앱 시작!\""
-  }
-}
-
-{
-  "name": "jekins-test",
-  "version": "1.0.0",
-  "scripts": {
     "build": "echo \"빌드 완료!\"",
     "test": "echo \"테스트 통과\" && exit 0",
     "start": "echo \"앱 시작!\""
