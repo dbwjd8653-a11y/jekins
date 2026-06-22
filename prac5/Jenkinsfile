@@ -1,5 +1,4 @@
-﻿@'
-pipeline {
+﻿pipeline {
     agent none
     stages {
         stage('Parallel Build & Test') {
@@ -20,4 +19,3 @@ pipeline {
         }
     }
 }
-'@ | Set-Content -Path "prac5\Jenkinsfile" -Encoding utf8 -NoNewline

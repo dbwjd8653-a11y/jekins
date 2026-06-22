@@ -1,5 +1,4 @@
-﻿@'
-pipeline {
+﻿pipeline {
     agent any
     stages {
         stage('Checkout') {
@@ -35,4 +34,3 @@ pipeline {
         }
     }
 }
-'@ | Set-Content -Path "prac3\Jenkinsfile" -Encoding utf8 -NoNewline
